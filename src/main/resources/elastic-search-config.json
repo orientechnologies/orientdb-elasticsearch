@@ -1,0 +1,17 @@
+{
+  "es": {
+    "host": "localhost",
+    "port": 9300,
+    "clusterName": "elasticsearch"
+  },
+  "include": {
+    "classes": {
+    },
+    "clusters": {
+    }
+  },
+  "exclude": {
+    "classes": [],
+    "clusters": []
+  }
+}
