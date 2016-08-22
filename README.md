@@ -11,7 +11,9 @@ This is the manual procedure to install Elastic Search plugin in OrientDB.
 - Copy the generated `orientdb-elasticsearch-*.jar` file is under the target directory
 - Copy the `elasticsearch-2.3.3.jar` file. You can find this jar on Sonatype repository online
 
-### 3. Register the OrientDB Elastic Search plugin in OrientDB's `config/orientdb-config.xml` file under the `handlers` (Handler is a plugin) tag:
+### 3. Register the OrientDB Elastic Search plugin
+
+In OrientDB's `config/orientdb-config.xml` file under the `handlers` (Handler is a plugin) tag, add this XML snippet:
 
 ``xml
 <handler class="com.orientechnologies.server.plugin.es.OElasticSearchPlugin">
