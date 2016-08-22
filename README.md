@@ -15,7 +15,7 @@ This is the manual procedure to install Elastic Search plugin in OrientDB.
 
 In OrientDB's `config/orientdb-config.xml` file under the `handlers` (Handler is a plugin) tag, add this XML snippet:
 
-``xml
+```xml
 <handler class="com.orientechnologies.server.plugin.es.OElasticSearchPlugin">
     <parameters>
         <parameter value="true" name="enabled"/>
