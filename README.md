@@ -8,8 +8,8 @@ This is the manual procedure to install Elastic Search plugin in OrientDB.
 
 ### 2. Copy libraries under OrientDB's `lib` directory.
 
-- Copy the generated `orientdb-elasticsearch-*.jar` file is under the target directory
-- Copy the `elasticsearch-2.3.3.jar` file. You can find this jar on Sonatype repository online
+- Copy the generated `orientdb-elasticsearch-*.jar` file is under the target directory into OrientDB lib directory
+- Download Elastic Seatch 2.3.3 (or major) and copy all the libraries under lib directory into OrientDB lib directory
 
 ### 3. Register the OrientDB Elastic Search plugin
 
@@ -48,3 +48,15 @@ The Elastic Search plugin creates this file under `databases/<your-db>/elastic-s
 ```
 
 You can modify it to configure the synchronization.
+
+### 5. Execute a synchronization
+
+You can execute a synchronization of classes, clusters or even the output of a command:
+- classes
+- clusters
+- command
+
+Example synchronizing the class "V":
+```
+curl -u admin:admin --data "{'classes':['V']}" http://localhost:2480/essync/GamesOfThrones
+```
