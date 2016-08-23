@@ -10,23 +10,19 @@ This is the manual procedure to install Elastic Search plugin in OrientDB.
 
 Copy the generated `orientdb-elasticsearch-*-dist.jar` file is under the target directory into OrientDB lib directory.
 
-### 3. Remove all the lucene*.jar
-
-Remove all the lucene*.jar from OrientDB's `lib` directory. This is because Elastic Search comes with own version of Lucene.
-
-### 4. Register the OrientDB Elastic Search plugin
+### 3. Register the OrientDB Elastic Search plugin
 
 In OrientDB's `config/orientdb-config.xml` file under the `handlers` (Handler is a plugin) tag, add this XML snippet:
 
 ```xml
-<handler class="com.orientechnologies.server.plugin.es.OElasticSearchPlugin">
+<handler class="com.orientechnologies.es.plugin.es.OElasticSearchPlugin">
     <parameters>
         <parameter value="true" name="enabled"/>
     </parameters>
 </handler>
 ```
 
-### 5. Configure the synchronization
+### 4. Configure the synchronization
 
 The Elastic Search plugin creates this file under `databases/<your-db>/elastic-search-config.json`:
 
@@ -52,7 +48,7 @@ The Elastic Search plugin creates this file under `databases/<your-db>/elastic-s
 
 You can modify it to configure the synchronization.
 
-### 6. Execute a synchronization
+### 5. Execute a synchronization
 
 You can execute a synchronization of classes, clusters or even the output of a command:
 - classes
