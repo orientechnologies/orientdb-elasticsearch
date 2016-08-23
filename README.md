@@ -8,10 +8,13 @@ This is the manual procedure to install Elastic Search plugin in OrientDB.
 
 ### 2. Copy libraries under OrientDB's `lib` directory.
 
-- Copy the generated `orientdb-elasticsearch-*.jar` file is under the target directory into OrientDB lib directory
-- Download Elastic Seatch 2.3.3 (or major) and copy all the libraries under lib directory into OrientDB lib directory
+Copy the generated `orientdb-elasticsearch-*-dist.jar` file is under the target directory into OrientDB lib directory.
 
-### 3. Register the OrientDB Elastic Search plugin
+### 3. Remove all the lucene*.jar
+
+Remove all the lucene*.jar from OrientDB's `lib` directory. This is because Elastic Search comes with own version of Lucene.
+
+### 4. Register the OrientDB Elastic Search plugin
 
 In OrientDB's `config/orientdb-config.xml` file under the `handlers` (Handler is a plugin) tag, add this XML snippet:
 
@@ -23,7 +26,7 @@ In OrientDB's `config/orientdb-config.xml` file under the `handlers` (Handler is
 </handler>
 ```
 
-### 4. Configure the synchronization
+### 5. Configure the synchronization
 
 The Elastic Search plugin creates this file under `databases/<your-db>/elastic-search-config.json`:
 
@@ -49,7 +52,7 @@ The Elastic Search plugin creates this file under `databases/<your-db>/elastic-s
 
 You can modify it to configure the synchronization.
 
-### 5. Execute a synchronization
+### 6. Execute a synchronization
 
 You can execute a synchronization of classes, clusters or even the output of a command:
 - classes
@@ -59,4 +62,11 @@ You can execute a synchronization of classes, clusters or even the output of a c
 Example synchronizing the class "V":
 ```
 curl -u admin:admin --data "{'classes':['V']}" http://localhost:2480/essync/GamesOfThrones
+{"result":[{"@type":"d","@version":0,"value":"Synchronized 2261 records"}]}
+```
+
+Example synchronizing a query:
+```
+curl -u admin:admin --data "{'command':'select from V where age > 10'}" http://localhost:2480/essync/GamesOfThrones
+{"result":[{"@type":"d","@version":0,"value":"Synchronized 23 records"}]}
 ```
