@@ -17,7 +17,7 @@
  *  * For more information: http://www.orientdb.com
  *
  */
-package com.orientechnologies.server.plugin.es;
+package com.orientechnologies.es.plugin.es;
 
 import com.orientechnologies.orient.core.db.record.OIdentifiable;
 import com.orientechnologies.orient.core.db.record.ridbag.ORidBag;

@@ -17,7 +17,7 @@
  *  * For more information: http://www.orientdb.com
  *
  */
-package com.orientechnologies.server.command;
+package com.orientechnologies.es.command;
 
 import com.orientechnologies.common.collection.OIterableObject;
 import com.orientechnologies.common.log.OLogManager;
@@ -30,7 +30,7 @@ import com.orientechnologies.orient.core.record.impl.ODocument;
 import com.orientechnologies.orient.server.network.protocol.http.OHttpRequest;
 import com.orientechnologies.orient.server.network.protocol.http.OHttpResponse;
 import com.orientechnologies.orient.server.network.protocol.http.command.OServerCommandAuthenticatedDbAbstract;
-import com.orientechnologies.server.plugin.es.OElasticSearchPlugin;
+import com.orientechnologies.es.plugin.es.OElasticSearchPlugin;
 
 import java.util.ArrayList;
 import java.util.Collection;

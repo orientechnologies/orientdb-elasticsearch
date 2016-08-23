@@ -1,0 +1,26 @@
+<assembly>
+    <id>dist</id>
+    <formats>
+        <format>jar</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory/>
+            <unpack>true</unpack>
+            <includes>
+                <include>${groupId}:${artifactId}</include>
+                <include>com.orientechnologies.es:*</include>
+                <include>org.elasticsearch:*</include>
+                <include>com.google.guava:guava</include>
+            </includes>
+            <excludes>
+                <exclude>org.apache.lucene:*</exclude>
+                <exclude>com.orientechnologies:core</exclude>
+                <exclude>com.orientechnologies:client</exclude>
+                <exclude>com.orientechnologies:server</exclude>
+            </excludes>
+        </dependencySet>
+    </dependencySets>
+
+</assembly>

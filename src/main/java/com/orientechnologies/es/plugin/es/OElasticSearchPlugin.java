@@ -17,7 +17,7 @@
  *  * For more information: http://www.orientdb.com
  *
  */
-package com.orientechnologies.server.plugin.es;
+package com.orientechnologies.es.plugin.es;
 
 import com.orientechnologies.common.io.OIOUtils;
 import com.orientechnologies.common.log.OLogManager;
@@ -32,7 +32,7 @@ import com.orientechnologies.orient.server.config.OServerParameterConfiguration;
 import com.orientechnologies.orient.server.network.OServerNetworkListener;
 import com.orientechnologies.orient.server.network.protocol.http.ONetworkProtocolHttpAbstract;
 import com.orientechnologies.orient.server.plugin.OServerPluginAbstract;
-import com.orientechnologies.server.command.OServerCommandESSync;
+import com.orientechnologies.es.command.OServerCommandESSync;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
