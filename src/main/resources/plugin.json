@@ -1,10 +1,10 @@
 {
-	"name" : "es",
-	"version" : "2.2",
-	"javaClass": "com.orientechnologies.es.ElasticSearchPlugin",
-	"parameters" : { },
-	"description" : "This is the OrientDB Elastic Search Connector Plugin",
-	"web" : "http://www.orientdb.com",
-	"copyrights" : "OrientDB LTD",
-	"license" : "Commercial"
+  "name": "es",
+  "version": "2.2",
+  "javaClass": "com.orientechnologies.es.plugin.es.OElasticSearchPlugin",
+  "parameters": {},
+  "description": "This is the OrientDB Elastic Search Connector Plugin",
+  "web": "http://www.orientdb.com",
+  "copyrights": "OrientDB LTD",
+  "license": "Commercial"
 }

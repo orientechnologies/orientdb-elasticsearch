@@ -21,6 +21,7 @@ package com.orientechnologies.es.plugin.es;
 
 import com.orientechnologies.common.io.OIOUtils;
 import com.orientechnologies.common.log.OLogManager;
+import com.orientechnologies.es.command.OServerCommandESSync;
 import com.orientechnologies.orient.core.Orient;
 import com.orientechnologies.orient.core.db.ODatabaseInternal;
 import com.orientechnologies.orient.core.db.ODatabaseLifecycleListener;
@@ -32,7 +33,6 @@ import com.orientechnologies.orient.server.config.OServerParameterConfiguration;
 import com.orientechnologies.orient.server.network.OServerNetworkListener;
 import com.orientechnologies.orient.server.network.protocol.http.ONetworkProtocolHttpAbstract;
 import com.orientechnologies.orient.server.plugin.OServerPluginAbstract;
-import com.orientechnologies.es.command.OServerCommandESSync;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
@@ -47,19 +47,22 @@ import java.util.concurrent.ConcurrentHashMap;
  * Elastic Search connector plugin.
  */
 public class OElasticSearchPlugin extends OServerPluginAbstract implements ODatabaseLifecycleListener {
-  private OServer                                                        server;
+  private OServer server;
   private ConcurrentHashMap<String, OElasticSearchDatabaseConfiguration> clientConfigurations = new ConcurrentHashMap<String, OElasticSearchDatabaseConfiguration>();
 
-  private boolean                                                        enabled              = false;
+  private boolean enabled = false;
 
   @Override
   public void config(final OServer server, final OServerParameterConfiguration[] iParams) {
     this.server = server;
 
+    OLogManager.instance().info(this, "ES plugin is enabled");
+
     for (OServerParameterConfiguration param : iParams) {
       if (param.name.equalsIgnoreCase("enabled")) {
         if (Boolean.parseBoolean(param.value))
           // ENABLE IT
+
           enabled = true;
       }
     }
@@ -101,6 +104,8 @@ public class OElasticSearchPlugin extends OServerPluginAbstract implements OData
 
   @Override
   public void onOpen(final ODatabaseInternal iDatabase) {
+    OLogManager.instance().info(this, "loading ES conf for database:: " + iDatabase.getName());
+
     final OElasticSearchDatabaseSync db = new OElasticSearchDatabaseSync(iDatabase.getName(), getESClient(iDatabase.getName()));
     iDatabase.registerHook(db);
   }
