@@ -8,12 +8,13 @@
         <dependencySet>
             <outputDirectory/>
             <unpack>true</unpack>
-            <includes>
-                <include>${groupId}:${artifactId}</include>
-                <include>com.orientechnologies.es:*</include>
-                <include>org.elasticsearch:*</include>
-                <include>com.google.guava:guava</include>
-            </includes>
+            <!--<includes>-->
+            <!--<include>${groupId}:${artifactId}</include>-->
+            <!--<include>com.orientechnologies.es:*</include>-->
+            <!--<include>org.elasticsearch:*</include>-->
+            <!--<include>com.google.guava:guava</include>-->
+            <!--<include>com.carrotsearch:*</include>-->
+            <!--</includes>-->
             <!--<excludes>-->
                 <!--<exclude>org.apache.lucene:*</exclude>-->
                 <!--<exclude>com.orientechnologies:core</exclude>-->

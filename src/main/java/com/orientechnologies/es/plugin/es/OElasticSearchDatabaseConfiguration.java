@@ -24,19 +24,24 @@ import com.orientechnologies.orient.core.db.ODatabaseRecordThreadLocal;
 import com.orientechnologies.orient.core.record.impl.ODocument;
 import org.elasticsearch.client.Client;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Elastic Search database configuration.
- * 
+ *
  * @author Luca Garulli
  */
 public class OElasticSearchDatabaseConfiguration {
-  private Client                         client;
   private final Map<String, Set<String>> includeClasses  = new HashMap<String, Set<String>>();
   private final Map<String, Set<String>> includeClusters = new HashMap<String, Set<String>>();
   private final Set<String>              excludeClasses  = new HashSet<String>();
   private final Set<String>              excludeClusters = new HashSet<String>();
+  private final Client client;
 
   public OElasticSearchDatabaseConfiguration(final Client client, final ODocument configuration) {
     this.client = client;

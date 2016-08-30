@@ -21,6 +21,7 @@ package com.orientechnologies.es.command;
 
 import com.orientechnologies.common.collection.OIterableObject;
 import com.orientechnologies.common.log.OLogManager;
+import com.orientechnologies.es.plugin.es.OElasticSearchPlugin;
 import com.orientechnologies.orient.core.command.OCommandExecutor;
 import com.orientechnologies.orient.core.command.OCommandManager;
 import com.orientechnologies.orient.core.command.OCommandRequestText;
@@ -30,14 +31,13 @@ import com.orientechnologies.orient.core.record.impl.ODocument;
 import com.orientechnologies.orient.server.network.protocol.http.OHttpRequest;
 import com.orientechnologies.orient.server.network.protocol.http.OHttpResponse;
 import com.orientechnologies.orient.server.network.protocol.http.command.OServerCommandAuthenticatedDbAbstract;
-import com.orientechnologies.es.plugin.es.OElasticSearchPlugin;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class OServerCommandESSync extends OServerCommandAuthenticatedDbAbstract {
-  private static final String[]      NAMES = { "GET|essync/*", "POST|essync/*" };
+  private static final String[] NAMES = { "GET|essync/*", "POST|essync/*" };
 
   private final OElasticSearchPlugin es;
 
@@ -47,6 +47,8 @@ public class OServerCommandESSync extends OServerCommandAuthenticatedDbAbstract 
 
   @Override
   public boolean execute(final OHttpRequest iRequest, OHttpResponse iResponse) throws Exception {
+
+    OLogManager.instance().info(this, "ES sync commmand received");
     final String[] urlParts = checkSyntax(iRequest.url, 1, "Syntax error: essync/<database>");
 
     String command = null;
@@ -65,8 +67,9 @@ public class OServerCommandESSync extends OServerCommandAuthenticatedDbAbstract 
     }
 
     iRequest.data.commandInfo = "Elastic Search Sync";
-    iRequest.data.commandDetail = command != null ? "command: " + command
-        : classes != null ? "classes: " + classes.toString() : clusters != null ? "clusters: " + clusters.toString() : "database";
+    iRequest.data.commandDetail = command != null ?
+        "command: " + command :
+        classes != null ? "classes: " + classes.toString() : clusters != null ? "clusters: " + clusters.toString() : "database";
 
     ODatabaseDocument db = null;
 

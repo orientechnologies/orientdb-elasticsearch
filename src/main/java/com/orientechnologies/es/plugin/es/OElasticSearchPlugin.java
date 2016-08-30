@@ -56,8 +56,6 @@ public class OElasticSearchPlugin extends OServerPluginAbstract implements OData
   public void config(final OServer server, final OServerParameterConfiguration[] iParams) {
     this.server = server;
 
-    OLogManager.instance().info(this, "ES plugin is enabled");
-
     for (OServerParameterConfiguration param : iParams) {
       if (param.name.equalsIgnoreCase("enabled")) {
         if (Boolean.parseBoolean(param.value))
@@ -66,6 +64,7 @@ public class OElasticSearchPlugin extends OServerPluginAbstract implements OData
           enabled = true;
       }
     }
+    OLogManager.instance().info(this, "Elastic sync plugin enabled:: " + enabled);
   }
 
   @Override
@@ -104,8 +103,11 @@ public class OElasticSearchPlugin extends OServerPluginAbstract implements OData
 
   @Override
   public void onOpen(final ODatabaseInternal iDatabase) {
-    OLogManager.instance().info(this, "loading ES conf for database:: " + iDatabase.getName());
 
+    if (iDatabase.getName().equalsIgnoreCase("OSystem"))
+      return;
+
+    OLogManager.instance().info(this, "loading ES conf for database %s", iDatabase.getName());
     final OElasticSearchDatabaseSync db = new OElasticSearchDatabaseSync(iDatabase.getName(), getESClient(iDatabase.getName()));
     iDatabase.registerHook(db);
   }
@@ -145,6 +147,10 @@ public class OElasticSearchPlugin extends OServerPluginAbstract implements OData
         } catch (IOException e) {
           OLogManager.instance().error(this, "Error on loading JSON file: %s", e, esConfig);
         }
+      } else {
+        OLogManager.instance().warn(this, "Database %s is not configured for  sync on ES", dbName);
+
+        return clientCfg;
       }
 
       try {
@@ -170,6 +176,7 @@ public class OElasticSearchPlugin extends OServerPluginAbstract implements OData
           clientCfg = existentClient;
         }
       } catch (UnknownHostException e) {
+
         OLogManager.instance().error(this, "Error on connecting to ES server", e);
       }
 

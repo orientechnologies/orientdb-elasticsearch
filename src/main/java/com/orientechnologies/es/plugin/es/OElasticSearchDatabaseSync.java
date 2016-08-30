@@ -39,17 +39,22 @@ import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Elastic Search connector plugin.
- * 
+ *
  * @author Luca Garulli
  */
 public class OElasticSearchDatabaseSync extends ODocumentHookAbstract {
 
-  private String                                    dbName;
   private final OElasticSearchDatabaseConfiguration esClient;
+  private final String                              dbName;
 
   public OElasticSearchDatabaseSync(final String dbName, final OElasticSearchDatabaseConfiguration esClient) {
     this.dbName = dbName;
@@ -115,7 +120,7 @@ public class OElasticSearchDatabaseSync extends ODocumentHookAbstract {
 
         if (value instanceof ORidBag) {
           final List<OIdentifiable> list = new ArrayList<OIdentifiable>();
-          for (Iterator<OIdentifiable> it = ((ORidBag) value).rawIterator(); it.hasNext();) {
+          for (Iterator<OIdentifiable> it = ((ORidBag) value).rawIterator(); it.hasNext(); ) {
             list.add(it.next());
           }
           map.put(f, list);
